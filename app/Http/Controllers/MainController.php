@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Test_table;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
@@ -15,7 +16,12 @@ class MainController extends Controller
     public function index()
     {
         $test_table = Test_table::all();
-        return view('main.index', compact('test_table'));
+
+        foreach ($test_table as $item){
+            $tree[$item->parent_id][] = $item->toArray();
+        }
+
+        return view('main.index', compact('tree'));
     }
 
     /**

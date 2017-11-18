@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Ноя 17 2017 г., 16:17
+-- Время создания: Ноя 18 2017 г., 16:34
 -- Версия сервера: 10.1.21-MariaDB
 -- Версия PHP: 5.6.30
 
@@ -19,6 +19,40 @@ SET time_zone = "+00:00";
 --
 -- База данных: `test_laravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(13, '2017_11_17_092614_update_test_table', 2),
+(20, '2014_10_12_000000_create_users_table', 3),
+(21, '2014_10_12_100000_create_password_resets_table', 3),
+(22, '2017_11_15_130930_create_test_table', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -42,7 +76,7 @@ CREATE TABLE `test_table` (
 --
 
 INSERT INTO `test_table` (`id`, `parent_id`, `full_name`, `position`, `salary`, `date`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Ермаков Феликс Борисович', 'директор', 25117, '1976-03-19', '2017-11-17 10:27:02', '2017-11-17 10:27:02'),
+(1, '0', 'Ермаков Феликс Борисович', 'директор', 25117, '1976-03-19', '2017-11-17 10:27:02', '2017-11-17 10:27:02'),
 (2, '1', 'Виктор Александрович Субботин', 'зам. директора', 22096, '2017-11-17', '2017-11-17 10:28:09', '2017-11-17 10:28:09'),
 (3, '1', 'Евдокимов Владлен Романович', 'зам. директора', 23171, '2017-11-17', '2017-11-17 10:28:09', '2017-11-17 10:28:09'),
 (4, '1', 'Вадим Романович Максимов', 'зам. директора', 24949, '2017-11-17', '2017-11-17 10:28:09', '2017-11-17 10:28:09'),
@@ -144,9 +178,44 @@ INSERT INTO `test_table` (`id`, `parent_id`, `full_name`, `position`, `salary`, 
 (100, '43', 'Казаков Трофим Максимович', 'инженер', 6086, '2006-06-28', '2017-11-17 10:30:16', '2017-11-17 10:30:16'),
 (101, '46', 'Донат Романович Костин', 'рабочий', 7430, '1997-06-17', '2017-11-17 10:30:16', '2017-11-17 10:30:16');
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Tolyk', 'dt150685@gmail.com', '$2y$10$87iFuL9Dkj0WK4EIzo9vcOjRnd6rhSmmwFaQ8K7EIDtHWuEpqSJL.', NULL, '2017-11-17 11:01:22', '2017-11-17 11:01:22');
+
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
 
 --
 -- Индексы таблицы `test_table`
@@ -155,14 +224,31 @@ ALTER TABLE `test_table`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
+--
+-- AUTO_INCREMENT для таблицы `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT для таблицы `test_table`
 --
 ALTER TABLE `test_table`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -2,32 +2,23 @@
 
 @section('content')
     <div class="container">
-        <div class="container">
 
-            @foreach($test_table as $item)
-                @if($item->position == 'директор')
-                    <div class="row">
-                    <div class="col-md-4 col-lg-4">{{ $item->full_name }} ({{$item->position}})</div>
-                    </div>
-                @elseif($item->position == 'зам. директора')
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-md-offset-1">{{ $item->full_name }} ({{$item->position}})</div>
-                    </div>
-                @elseif($item->position == 'начальник отдела')
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-md-offset-2">{{ $item->full_name }} ({{$item->position}})</div>
-                    </div>
-                @elseif($item->position == 'начальник бригады')
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-md-offset-3">{{ $item->full_name }} ({{$item->position}})</div>
-                    </div>
-                @else
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-md-offset-4">{{ $item->full_name }} ({{$item->position}})</div>
-                    </div>
-                @endif
-            @endforeach
+    <?php
+            function  build_tree($cats,$parent_id = 0){
+                if(is_array($cats) && count($cats[$parent_id])>0){
+                    $tr = '<ul>';
+                    foreach($cats[$parent_id] as $cat){
+                        $tr .= '<li>'.$cat['full_name'];
+                        $tr .=  build_tree($cats,$cat['id']);
+                        $tr .= '</li>';
+                    }
+                    $tr .= '</ul>';
+                }
+                else return null;
+                return $tr;
+            }
 
-        </div>
+        echo @build_tree($tree); ?>
+
     </div>
 @endsection
