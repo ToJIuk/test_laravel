@@ -24,6 +24,14 @@ class MainController extends Controller
         return view('main.index', compact('tree'));
     }
 
+    public function mylist()
+    {
+        $test_table = DB::table('test_table')->paginate(20);
+        return view('main.mylist', compact('test_table'));
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

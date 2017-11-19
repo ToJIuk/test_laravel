@@ -36,7 +36,8 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;<li><a href="{{ route('tree') }}">Главная</a></li>
+                        &nbsp;<li><a href="{{ route('list') }}">Информация о сотрудниках</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

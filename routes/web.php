@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tree', 'MainController@index')->middleware('auth');
+Route::get('/tree', 'MainController@index')->name('tree');
+Route::get('/list', 'MainController@mylist')->middleware('auth')->name('list');
 
 Auth::routes();
 
