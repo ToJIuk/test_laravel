@@ -2,29 +2,64 @@
 
 @section('content')
     <div class="container">
-
-        <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                Сортировать
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">По порядку</a></li>
-                <li><a href="#">По ФИО</a></li>
-                <li><a href="#">По зарплате</a></li>
-                <li><a href="#">По дате зачисления</a></li>
-                <li><a href="#">По должности</a></li>
-            </ul>
-        </div>
-        <br><br>
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th>#</th>
-                <th>ФИО</th>
-                <th>Должность</th>
-                <th>Зарплата, грн</th>
-                <th>Дата зачисления</th>
+                <th>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">№
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href={{url('list/id')}}>Сортировать по возрастанию</a></li>
+                            <li><a href={{url('list/id/desc')}}>Сортировать по убыванию</a></li>
+                        </ul>
+                    </div>
+                </th>
+                <th>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">ФИО
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href={{url('list/full_name')}}>Сортировать по возрастанию</a></li>
+                            <li><a href={{url('list/full_name/desc')}}>Сортировать по убыванию</a></li>
+                        </ul>
+                    </div>
+                </th>
+                <th>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Должность
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href={{url('list/salary')}}>Сортировать по возрастанию</a></li>
+                            <li><a href={{url('list/salary/desc')}}>Сортировать по убыванию</a></li>
+                        </ul>
+                    </div>
+                </th>
+                <th>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Зарплата, грн
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href={{url('list/salary')}}>Сортировать по возрастанию</a></li>
+                            <li><a href={{url('list/salary/desc')}}>Сортировать по убыванию</a></li>
+                        </ul>
+                    </div>
+                </th>
+                <th>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Дата зачисления
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href={{url('list/date')}}>Сортировать по возрастанию</a></li>
+                            <li><a href={{url('list/date/desc')}}>Сортировать по убыванию</a></li>
+                        </ul>
+                    </div>
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -40,5 +75,6 @@
             </tbody>
         </table>
         {{ $test_table->links() }}
+
     </div>
 @endsection

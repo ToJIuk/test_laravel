@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/tree', 'MainController@index')->name('tree');
-Route::get('/list', 'MainController@mylist')->middleware('auth')->name('list');
+
+Route::any('/list/{field?}/{sort?}', 'MainController@mylist')->middleware('auth')->name('list');
 
 Auth::routes();
 

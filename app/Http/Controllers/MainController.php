@@ -24,9 +24,11 @@ class MainController extends Controller
         return view('main.index', compact('tree'));
     }
 
-    public function mylist()
+    public function mylist(Request $request)
     {
-        $test_table = DB::table('test_table')->paginate(20);
+        $test_table = DB::table('test_table')->orderBy(
+            $request->field ? $request->field : 'id', $request->sort ? $request->sort : 'asc')
+            ->paginate(20);
         return view('main.mylist', compact('test_table'));
 
     }
